@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {FaUser} from "react-icons/fa"
+import {toast} from "react-toastify"
 
 function Register() {
 
@@ -9,6 +10,14 @@ function Register() {
       [e.target.name]:e.target.value
 
     }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if(password != password2) {
+      toast.error("Passswords do not match")
+    }
   }
 
   const [formData, setFormData] = useState({
@@ -28,7 +37,7 @@ function Register() {
     </section>
     
     <section className="form">
-      <form>
+      <form onSubmit = {onSubmit}>
         <div className="form-group">
           <input
            type="text"
@@ -37,7 +46,8 @@ function Register() {
            name="name"
            value={name}
            placeholder="Please enter your name"
-           onChange={onChange} />
+           onChange={onChange}
+           required />
         </div>
 
         <div className="form-group">
@@ -48,7 +58,8 @@ function Register() {
            name="email"
            value={email}
            placeholder="Please enter your email address"
-           onChange={onChange} />
+           onChange={onChange}
+           required />
         </div>
 
         <div className="form-group">
@@ -59,7 +70,8 @@ function Register() {
            name="password"
            value={password}
            placeholder="Please enter your password"
-           onChange={onChange} />
+           onChange={onChange}
+           required />
         </div>
 
         <div className="form-group">
@@ -70,7 +82,13 @@ function Register() {
            name="password2"
            value={password2}
            placeholder="Please confirm your password"
-           onChange={onChange} />
+           onChange={onChange}
+           required />
+        </div>
+        <div className="form-group">
+          <button className="btn btn-block">
+            Submit
+          </button>  
         </div>
       </form>
     </section>
